@@ -3,7 +3,6 @@ import pandas as pd
 def average_selling_price(prices: pd.DataFrame, units_sold: pd.DataFrame) -> pd.DataFrame:
     df = prices.merge(units_sold, on="product_id", how="left")
 
-    # Keep only rows where purchase_date falls inside the price period
     df = df[
         (df["purchase_date"] >= df["start_date"]) &
         (df["purchase_date"] <= df["end_date"])
@@ -22,7 +21,6 @@ def average_selling_price(prices: pd.DataFrame, units_sold: pd.DataFrame) -> pd.
 
     sales["average_price"] = (sales["total_price"] / sales["total_units"]).round(2)
 
-    # Include all products, even if they had no sales
     result = prices[["product_id"]].drop_duplicates().merge(
         sales[["product_id", "average_price"]],
         on="product_id",
