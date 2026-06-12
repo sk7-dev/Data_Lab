@@ -1,13 +1,8 @@
-class Solution {
-public:
-    int removeDuplicates(vector<int>& nums) {
-        int k = 1;
-        for (int i = 1; i < nums.size(); i++) {
-            if (nums[i] != nums[k - 1]) {
-                nums[k] = nums[i];
-                k++;
-            }
-        }
-        return k;
-    }
-};
+class Solution:
+    def removeDuplicates(self, nums: List[int]) -> int:
+        k = 1
+        for i in range(1, len(nums)):
+            if nums[i] != nums[k - 1]:
+                nums[k] = nums[i]
+                k += 1
+        return k
